@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-green: #6CB065;
+    --color-green-dim: rgba(108, 176, 101, 0.15);
+    --color-green-glow: rgba(108, 176, 101, 0.4);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [data-theme='dark'] {
+    --bg-primary: #000000;
+    --bg-card: #121212;
+    --text-primary: #e5e5e5;
+    --text-secondary: #a3a3a3;
+    --border-subtle: rgba(108, 176, 101, 0.2);
+  }
+
+  [data-theme='light'] {
+    --bg-primary: #ffffff;
+    --bg-card: #f5f5f5;
+    --text-primary: #1a1a1a;
+    --text-secondary: #525252;
+    --border-subtle: rgba(108, 176, 101, 0.3);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: rgba(108, 176, 101, 0.3);
+    color: inherit;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(108, 176, 101, 0.4);
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(108, 176, 101, 0.7);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}

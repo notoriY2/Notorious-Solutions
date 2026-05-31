@@ -110,24 +110,15 @@ export default function Contact() {
     setIsSubmitting(true);
 
     try {
-      /* 👉 OPTION A: For Netlify Forms deployment pipeline:
-        await fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({ "form-name": "contact", ...form }).toString(),
-        });
-
-         👉 OPTION B: Standard internal REST API or serverless route execution:
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
-        });
-        if (!response.ok) throw new Error('Network package drop detected.');
-      */
-
-      // Simulated network pipeline latency
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // 🚀 Real payload submission dispatch to Netlify form pipeline handler
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ 
+          "form-name": "contact", 
+          ...form 
+        }).toString(),
+      });
 
       setSubmitted(true);
       setForm({ name: '', email: '', brief: '', projectType: '' });
@@ -305,7 +296,16 @@ export default function Contact() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+              <form 
+                onSubmit={handleSubmit} 
+                className="flex flex-col gap-5" 
+                noValidate 
+                name="contact" 
+                data-netlify="true"
+              >
+                {/* Hidden field element for semantic recognition in Netlify React index mappings */}
+                <input type="hidden" name="form-name" value="contact" />
+
                 {/* Form Level Error Alert */}
                 {submitError && (
                   <div className="flex items-center gap-2 p-3 rounded border border-red-500/30 bg-red-500/10 text-red-400 text-xs font-semibold">
@@ -317,14 +317,14 @@ export default function Contact() {
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold tracking-widest uppercase" style={{ color: isDark ? '#a3a3a3' : '#525252', fontFamily: "'Courier New', monospace" }}>Name</label>
                   <div className="relative">
-                    <input type="text" disabled={isSubmitting} value={form.name} onChange={e => handleChange('name', e.target.value)} onBlur={() => handleBlur('name')} placeholder="Your full name" className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 disabled:opacity-50 ${borderClass(validation.name)}`} style={inputStyle(validation.name)} />
+                    <input type="text" name="name" disabled={isSubmitting} value={form.name} onChange={e => handleChange('name', e.target.value)} onBlur={() => handleBlur('name')} placeholder="Your full name" className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 disabled:opacity-50 ${borderClass(validation.name)}`} style={inputStyle(validation.name)} />
                   </div>
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold tracking-widest uppercase" style={{ color: isDark ? '#a3a3a3' : '#525252', fontFamily: "'Courier New', monospace" }}>Email</label>
                   <div className="relative">
-                    <input type="email" disabled={isSubmitting} value={form.email} onChange={e => handleChange('email', e.target.value)} onBlur={() => handleBlur('email')} placeholder="your@email.com" className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 disabled:opacity-50 ${borderClass(validation.email)}`} style={inputStyle(validation.email)} />
+                    <input type="email" name="email" disabled={isSubmitting} value={form.email} onChange={e => handleChange('email', e.target.value)} onBlur={() => handleBlur('email')} placeholder="your@email.com" className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 disabled:opacity-50 ${borderClass(validation.email)}`} style={inputStyle(validation.email)} />
                   </div>
                 </div>
 
@@ -359,11 +359,13 @@ export default function Contact() {
                       );
                     })}
                   </div>
+                  {/* Keep selection values synced with form parsing */}
+                  <input type="hidden" name="projectType" value={form.projectType} />
                 </div>
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-semibold tracking-widest uppercase" style={{ color: isDark ? '#a3a3a3' : '#525252', fontFamily: "'Courier New', monospace" }}>Project Brief</label>
-                  <textarea disabled={isSubmitting} value={form.brief} onChange={e => handleChange('brief', e.target.value)} onBlur={() => handleBlur('brief')} placeholder="Describe your project..." rows={4} className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 resize-none disabled:opacity-50 ${borderClass(validation.brief)}`} style={inputStyle(validation.brief)} />
+                  <textarea name="brief" disabled={isSubmitting} value={form.brief} onChange={e => handleChange('brief', e.target.value)} onBlur={() => handleBlur('brief')} placeholder="Describe your project..." rows={4} className={`w-full px-4 py-3 rounded border text-sm outline-none transition-all duration-300 resize-none disabled:opacity-50 ${borderClass(validation.brief)}`} style={inputStyle(validation.brief)} />
                 </div>
 
                 <button 

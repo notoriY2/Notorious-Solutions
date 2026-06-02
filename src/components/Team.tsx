@@ -41,7 +41,7 @@ const TEAM: TeamMember[] = [
     id: 'creative-ideation',
     name: 'Siphosethu Mlenzana',
     role: 'Creative Conceptualist & Copy Director',
-    image: userImage,
+    image: sphola,
   },
 ];
 

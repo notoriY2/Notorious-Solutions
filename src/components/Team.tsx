@@ -2,6 +2,7 @@ import { useTheme } from '../context/ThemeContext';
 import { Github, Linkedin } from 'lucide-react';
 // Import the image asset so Vite can bundle and create a valid URL token
 import userImage from '../assets/96.jpeg'; 
+import sphola from '../assets/103.jpeg';
 import mosa from '../assets/102.jpeg';
 import jr from '../assets/100.jpeg';
 

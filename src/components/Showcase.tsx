@@ -568,7 +568,7 @@ const PROJECTS: Project[] = [
   "images": ["60.png", "72.png", "73.png", "74.png", "75.png", "76.png", "77.png", "78.png", "79.png", "80.png"],
   "tags": ["React", "Supabase", "TypeScript", "Academic SaaS"],
   "liveUrl": "https://trackademy-omega.vercel.app",
-  "gridSpan": "large",
+  "gridSpan": "medium",
   "documentation": {
     "overview": "Trackademy is a single-page client application powered by a Supabase backend and a Postgres database layer. The platform automates data synchronization across institutional hierarchies—encompassing faculties, departments, and programs—while securely handling academic records, transcript generation, and role-based permissions.",
     "sections": [
